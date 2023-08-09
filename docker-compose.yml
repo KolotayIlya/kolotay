@@ -1,0 +1,16 @@
+version: "2"
+services:
+  app:
+    build:
+      context: .
+    restart: always
+    environment:
+      - NOTION_TOKEN=secret_PDy7iYEi3lgUqD2lcZ0uYtp56fGVEF1jDiGgaogAtbx
+      - NOTION_TASK_DB=296979794bf14ef8b490c4c3635cf1ab
+      - TELEGRAM_BOT_TOKEN=6618598301:AAHFaEdqbc7H4FKGxwcLn6WspKVw8BC-52o
+      - TELEGRAM_OWNER_ID=488996090
+      - TELEGRAM_ALLOW_IDS=488996090
+networks:
+  reverse-proxy:
+    external:
+      name: reverse-proxy

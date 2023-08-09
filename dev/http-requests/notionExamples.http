@@ -1,0 +1,30 @@
+POST https://api.notion.com/v1/pages
+Authorization: secret_PDy7iYEi3lgUqD2lcZ0uYtp56fGVEF1jDiGgaogAtbx
+Notion-Version: 2021-05-13
+Content-Type: application/json
+
+{
+    "parent": { "database_id": "296979794bf14ef8b490c4c3635cf1ab"},
+    "properties": {
+      "Обезьянопонятная задача": {
+        "title": [
+          {
+            "text": {
+              "content": "title"
+            }
+          }
+        ]
+      },
+      "TGAuther": {
+        "select": {
+          "name": "Телеграмм"
+        }
+      }
+    }
+  }
+
+###
+
+GET https://api.notion.com/v1/databases
+Authorization: secret_PDy7iYEi3lgUqD2lcZ0uYtp56fGVEF1jDiGgaogAtbx
+Notion-Version: 2021-05-13
