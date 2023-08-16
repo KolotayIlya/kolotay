@@ -1,48 +1,44 @@
-import { Client } from '@notionhq/client';
-import { CreatePageResponse } from "@notionhq/client/build/src/api-endpoints";
-import env from '../../env';
-import debug from 'debug';
-
-const ll = debug('notionbot::notionConnector');
-
-let notion: Client;
-notion = new Client({
-    auth: env!.NOTION_TOKEN,
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const client_1 = require("@notionhq/client");
+const env_1 = __importDefault(require("../../env"));
+const debug_1 = __importDefault(require("debug"));
+const ll = (0, debug_1.default)('notionbot::notionConnector');
+const notion = new client_1.Client({
+    auth: env_1.default.NOTION_TOKEN,
 });
-export default {
-    createTask: function (title: string, tgAuthor: string): Promise<CreatePageResponse> {
+const taskDB = env_1.default.NOTION_TASK_DB;
+exports.default = {
+    createTask: function (title, tgAuthor) {
         ll('creating task', title, 'from', tgAuthor);
         return notion.pages.create({
             parent: {
-                database_id: '296979794bf14ef8b490c4c3635cf1ab'
+                database_id: taskDB
             },
             properties: {
-                "title": {
-                    type: "title",
-                    title: [
-                        {
-                            text: {
-                                content: title
-                            }
-                        }
-                    ]
-                },
-                "TGAuthor": {
-                    type: "rich_text",
-                    rich_text: [
-                        {
-                            type: "text",
-                            text: {
-                                content: tgAuthor
-                            }
-                        }
-                    ]
-                }
+      "Обезьянопонятная задача": {
+        title: [
+          {
+            type: "text",
+            text: {
+              content: title
             }
-
+          }
+        ]
+      },
+      "TGAuther": {
+        "select": {
+          "name": "Телеграмм"
+        }
+      }
+            }
         });
     },
-    convertTaskToUrl: function (task: CreatePageResponse): string {
+    convertTaskToUrl: function (task) {
         return task.id.replace(/-/g, ''); // конвертируем id в рабочий для ссылки
     }
 };
+//# sourceMappingURL=connector.js.map
